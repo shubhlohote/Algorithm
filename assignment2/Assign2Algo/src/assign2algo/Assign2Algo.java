@@ -19,6 +19,14 @@ public class Assign2Algo {
      
     public static void main(String[] args) {
         // TODO code application logic here
+
+	 BinaryTree bt = new BinaryTree();
+        bt.insert(5);
+        
+        int request = 4;
+        
+        
+        //int nextReq = 8;
     }
     
 }
