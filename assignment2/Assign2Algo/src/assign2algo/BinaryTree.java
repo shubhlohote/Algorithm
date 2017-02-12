@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,16 +5,19 @@
  */
 package assign2algo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author shubhangi
  */
 public class BinaryTree {
     private Node root;
- 
+    private static ArrayList allocatedMemory;
     /* Constructor */
     public BinaryTree(){
         root = null;
+        allocatedMemory = new ArrayList<Node>();
     }
     
     /* Function to check if tree is empty */
@@ -66,22 +68,31 @@ public class BinaryTree {
     
     /* Function to search for an element */
     public boolean search(int val){
+        if(val> root.getData())
+        {
+            System.out.println("Sufficient memory is not available !!");
+            return false;
+        }
+        else
         return search(root, val);
+        
     }
     
     /* Function to search for an element recursively */
     private boolean search(Node r, int val){
-        if (r.getData() == val){
+        
+        if (r.getData() == val || (r.getData() > val && val > r.getData()/2)){
             boolean result = inorder(r);
             if(result){
                 makeInOrderBusy(r);
+                allocatedMemory.add(r);
+                System.out.println("Allocated memory is -> "+r.data);
                 return true;
             }
             else{
                 return false;
             }
         }
-            
         if (r.getLeft() != null)
             if (search(r.getLeft(), val))
                 return true;
