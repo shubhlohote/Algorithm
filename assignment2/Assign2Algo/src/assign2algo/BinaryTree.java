@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,26 +25,32 @@ public class BinaryTree {
     
     /* Functions to insert data */
     public void insert(int data){
-         root = insert(root, data);
+        root = insert(root, data);
+        System.out.println(root.data);
     }
     
     /* Function to insert data recursively */
     private Node insert(Node node, int data){
-        if (node == null)
-            node = new Node(data);
-        else{
-            if (node.getRight() == null)
+        int memory = (int) Math.pow(2, data);
+        node = new Node(memory);
+        while(data>0){
+            if(node.right==null){
+                data--;
+                node.left = insert(node.left, data);
                 node.right = insert(node.right, data);
-            else
-                node.left = insert(node.left, data);             
-        }
+            }
+            else{
+                break;
+            }
+        } 
         return node;
     }     
+
     /* Function to count number of nodes */
     public int countNodes(){
-         return countNodes(root);
+        return countNodes(root);
     }
-    
+
     /* Function to count number of nodes recursively */
     private int countNodes(Node r){
         if (r == null)
@@ -55,9 +62,10 @@ public class BinaryTree {
             return l;
         }
     }
+    
     /* Function to search for an element */
     public boolean search(int val){
-         return search(root, val);
+        return search(root, val);
     }
     
     /* Function to search for an element recursively */
@@ -77,10 +85,9 @@ public class BinaryTree {
     public void inorder(){
         inorder(root);
     }
-    
+
     private void inorder(Node r){
-        if (r != null)
-        {
+        if (r != null){
             inorder(r.getLeft());
             System.out.print(r.getData() +" ");
             inorder(r.getRight());
@@ -111,5 +118,5 @@ public class BinaryTree {
             postorder(r.getRight());
             System.out.print(r.getData() +" ");
         }
-    }         
+    }     
 }
