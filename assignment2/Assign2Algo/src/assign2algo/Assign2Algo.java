@@ -21,12 +21,15 @@ public class Assign2Algo {
         // TODO code application logic here
 
 	 BinaryTree bt = new BinaryTree();
-        bt.insert(5);
+        bt.insert(3);
         
         int request = 4;
+        boolean available = bt.search(4);
+        System.out.println(available);
         
-        
-        //int nextReq = 8;
+        int nextReq = 4;
+        available = bt.search(4);
+        System.out.println(available);
     }
     
 }

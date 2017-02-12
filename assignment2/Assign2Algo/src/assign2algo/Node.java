@@ -12,24 +12,31 @@ package assign2algo;
 public class Node {
     Node left;
     Node right;
-     String status;
-     int data;
+    String status;
+    int data;
  
-     /* Constructor */
-     public Node()
-     {
-         left = null;
-         right = null;
-         data = 0;
-     }
-     /* Constructor */
-     public Node(int n)
-     {
-         left = null;
-         right = null;
-         data = n;
-     }
+    /* Constructor */
+    public Node(){
+        left = null;
+        right = null;
+        data = 0;
+    }
+    
+    /* Constructor */
+    public Node(int n){
+        left = null;
+        right = null;
+        data = n;
+    }
 
+    /* Constructor */
+    public Node(int n, String status){
+        left = null;
+        right = null;
+        data = n;
+        this.status = status;
+    }
+    
     public String getStatus() {
         return status;
     }

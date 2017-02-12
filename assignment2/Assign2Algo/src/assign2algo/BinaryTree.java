@@ -32,7 +32,8 @@ public class BinaryTree {
     /* Function to insert data recursively */
     private Node insert(Node node, int data){
         int memory = (int) Math.pow(2, data);
-        node = new Node(memory);
+        node = new Node(memory, "available");
+        
         while(data>0){
             if(node.right==null){
                 data--;
@@ -70,8 +71,17 @@ public class BinaryTree {
     
     /* Function to search for an element recursively */
     private boolean search(Node r, int val){
-        if (r.getData() == val)
-            return true;
+        if (r.getData() == val){
+            boolean result = inorder(r);
+            if(result){
+                makeInOrderBusy(r);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+            
         if (r.getLeft() != null)
             if (search(r.getLeft(), val))
                 return true;
@@ -86,11 +96,32 @@ public class BinaryTree {
         inorder(root);
     }
 
-    private void inorder(Node r){
+    private boolean inorder(Node r){
+        boolean flag = true;
+        boolean flagLeft = true,flagRight = true;
         if (r != null){
-            inorder(r.getLeft());
-            System.out.print(r.getData() +" ");
-            inorder(r.getRight());
+            if(!(r.status.equalsIgnoreCase("busy"))){
+                flagLeft = inorder(r.getLeft());
+                flagRight = inorder(r.getRight());
+            }
+            else{
+                flag = false;
+            }
+        }
+        else{
+            flag = true;
+        }
+        if(flagLeft==false||flagRight==false){
+            flag = false;
+        }
+        return flag;
+    }
+    
+    private void makeInOrderBusy(Node r){
+        if (r != null){
+            r.setStatus("busy");
+            makeInOrderBusy(r.getLeft());
+            makeInOrderBusy(r.getRight());
         }
     }
     
