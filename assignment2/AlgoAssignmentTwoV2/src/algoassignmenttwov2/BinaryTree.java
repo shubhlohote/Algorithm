@@ -169,27 +169,31 @@ public class BinaryTree {
      * Deallocation method
      * @param requestID 
      */
-    void deallocate(int requestID) {
-        System.out.println("\nDeallocated request id - "+requestID);
+    void deallocate(int requestID, StringBuilder builder) {
+        //System.out.println("\nDeallocated request id - "+requestID);
         for(int i=0;i<allocatedMemory.size();i++){
             if(allocatedMemory.get(i).getProcessIdForRequest()==requestID){
                 allocatedMemory.remove(i);
                 break;
             }
         }
-        deallocate(root, requestID);
+        deallocate(root, requestID, builder);
     }
 
-    private void deallocate(Node node, int requestID) {
+    private void deallocate(Node node, int requestID, StringBuilder builder) {
         if (node.getProcessIdForRequest() == requestID) {
             node.setStatus("available");
-            System.out.print(" Node id - "+node.getNodeId()+" ");
+            //System.out.print(" Node id - "+node.getNodeId()+" ");
+            builder.append("\t\t\t\t\t");
+            builder.append(',');
+            builder.append(node.getNodeId());
+            builder.append('\n');
         }
         if (node.getLeft() != null) {
-            deallocate(node.getLeft(), requestID);
+            deallocate(node.getLeft(), requestID, builder);
         }
         if (node.getRight() != null) {
-            deallocate(node.getRight(), requestID);
+            deallocate(node.getRight(), requestID, builder);
         }
     }
 }
